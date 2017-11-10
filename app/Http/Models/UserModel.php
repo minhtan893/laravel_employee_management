@@ -13,4 +13,20 @@ class UserModel extends Model
 {
     protected $table = "users";
     protected $fillable = ['id', 'name', 'username', 'email', 'days_on'];
+
+    /**
+     * @return bool
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role === 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 1;
+    }
 }
