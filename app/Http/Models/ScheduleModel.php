@@ -44,6 +44,10 @@ class ScheduleModel
           return false;
     }
 
+    /**
+     * @param $friend_id
+     * @return bool
+     */
     public function checkExistFriend($friend_id)
     {
         $daysGHOed = count($this->daysGHQ);
@@ -64,6 +68,10 @@ class ScheduleModel
         return true;
     }
 
+    /**
+     * @param Carbon $day
+     * @param $id
+     */
     public function choised(Carbon $day,$id)
     {
         $this->daysGHQ->push(["day" => $day, "friend_id" => $id]);

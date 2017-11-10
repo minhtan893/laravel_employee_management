@@ -5,8 +5,7 @@
 @else
     <?php  $week=1; ?>
     @for($i=0-($schedule[0][0]->dayOfWeek-2); $i<= count($schedule); $i =$i+5)
-      {{$i}}
-     <table class="table table-condensed">
+     <table class="table table-bordered">
          <tr>
              <th>Tuần {{$week}}</th>
              <th>Thứ 2</th>
@@ -31,7 +30,7 @@
          @if($j<0)
              <th></th>
          @else
-             <th>{{$schedule[$j][1]->usernmae}}</th>
+             <th>{{$schedule[$j][1]->username}}</th>
          @endif
      @endfor
          </tr>
@@ -41,7 +40,7 @@
          @if($j<0)
              <th></th>
          @else
-             <th>{{$schedule[$j][1]->username}}</th>
+             <th>{{$schedule[$j][2]->username}}</th>
          @endif
      @endfor
          </tr>
