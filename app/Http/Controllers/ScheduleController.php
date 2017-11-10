@@ -39,7 +39,7 @@ class ScheduleController extends Controller
             }
         }
 
-        $view = view('schedule', ['schedule'=>$monthSchedule])->render();
+        $view = view('schedule', ['schedule'=>$monthSchedule, 'thisMonth' => $thisMonth])->render();
 
         return response()->json($view);
 
@@ -101,7 +101,7 @@ class ScheduleController extends Controller
         }
         $checkAll = $members[$randoms[1]]->checkExistFriend($members[$randoms[0]]->user_id);
         if($checkAll == false){
-            if($this->max_turn <= 500){
+            if($this->max_turn <= 1000){
                 $this->max_turn++;
                 return $this->createRandom($day, $schedules);
             }
@@ -118,7 +118,7 @@ class ScheduleController extends Controller
      */
     private function getMembersHasThatDay(Carbon $day, array $schedules, $except = false ){
        return array_filter($schedules, function($item) use($day, $except){
-            $hasDay =  $item->checkLimitForMember();
+            $hasDay =  $item->checkExistDayForMember($day);
             if($hasDay){
                 return $item;
             }

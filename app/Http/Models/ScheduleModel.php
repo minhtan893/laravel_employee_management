@@ -45,9 +45,30 @@ class ScheduleModel
     }
 
     /**
-     * @param $friend_id
+     * @param Carbon $day
      * @return bool
      */
+    public function checkExistDayForMember(Carbon $day)
+    {
+        if($this->checkLimitForMember() === false) return false;
+        $hasDay = $this->days_on->filter(function($item) use ($day) {
+            return $item->day === $day->day;
+        });
+        $beforeDay = $this->daysGHQ->filter(function($item) use ($day){
+            return $item['day']->day === $day->day-1;
+        });
+        if($beforeDay->count()) return false;
+        $beforeDay = $this->daysGHQ->filter(function($item) use ($day){
+            return $item['day']->day === $day->day-2;
+        });
+        if($beforeDay->count()) return false;
+        if($hasDay->count()){
+            return true;
+        }
+
+        return false;
+    }
+
     public function checkExistFriend($friend_id)
     {
         $daysGHOed = count($this->daysGHQ);
@@ -59,7 +80,7 @@ class ScheduleModel
         }else{
             $limit = $daysGHOed -1;
         }
-        for ($i = $limit; $i>0; $i--){
+        for ($i = $limit; $i > 0; $i--){
                 if($this->daysGHQ[$i]['friend_id'] === $friend_id){
                     return false;
                 }
