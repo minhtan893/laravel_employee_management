@@ -163,6 +163,16 @@
     function showCalender() {
         $('#days_on').datepicker('show');
     }
+    function getCSRFTokenValue(){
+        return "{{csrf_token()}}";
+    }
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}"
+            }
+        });
+    });
 </script>
 @yield('scripts-after-end')
 </body>

@@ -23,4 +23,4 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
 });
 
 //Schedule
-Route::get('/schedule', 'ScheduleController@generate')->name('schedule.generate');
+Route::post('/schedule', 'ScheduleController@generate')->name('schedule.generate');
